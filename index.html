@@ -3,14 +3,14 @@
 <head>
 <title> Quarentenados </title>
 </head>
-<body style="background-color: #ccc;">
+<body style="background-color: #eeebe9;">
 
 <!-- COMECO - table corpo -->
 <table>
 	<tr>
 		<th>
 			<!-- Titulo da pagina -->
-			<h1 style="color: #474747;">Quarentenados</h1>
+			<h1 style="color: #4cb54f;">Quarentenados</h1>
 		</th>
 	<tr>
 	<tr>
@@ -19,7 +19,7 @@
 		<th style="width: 30%; >">
 			<!-- COMECO - menu -->
 			<ul>	
-				<a href="#"><li class="itemMenu">Novo jogo</li></a>
+				<a href="#"><li class="itemMenuPrimeiro">Novo jogo</li></a>
 				<a href="#"><li class="itemMenu">Conquistas</li></a>
 				<a href="#"><li class="itemMenu">Configurações</li></a>
 				<a href="#"><li class="itemMenu">Créditos</li></a>
@@ -35,18 +35,32 @@
 <!-- FIM - table corpo -->
 
 <style>
-.itemMenu{
-	color: #474747;
+.itemMenuPrimeiro{
+	color: #eeebe9;
+	background-color: #4cb54f;
 	border-style: solid;
-	border-color: #474747;
+	border-color: #4cb54f;
+	line-height: 40px;
+	margin-bottom:10px;
+	transition: 0.5s;
+}
+
+.itemMenuPrimeiro:hover{
+	color: #4cb54f;
+	background-color: #eeebe9;
+}
+.itemMenu{
+	color: #4cb54f;
+	border-style: solid;
+	border-color: #4cb54f;
 	line-height: 40px;
 	margin-bottom:10px;
 	transition: 0.5s;
 }
 
 .itemMenu:hover{
-	color: #ccc;
-	background-color: #474747;
+	color: #eeebe9;
+	background-color: #4cb54f;
 }
 
 table {
