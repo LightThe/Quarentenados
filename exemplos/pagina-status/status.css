@@ -1,0 +1,179 @@
+/* BASICO */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    font-size: 10px;
+}
+
+body {
+    min-height: 100vh;
+    color: rgb(41, 33, 5);
+
+    background: #f3efdd;
+}
+
+body,
+input,
+button,
+textarea {
+    font: 400 1.8rem/1 sans-serif;
+}
+
+/* PAGINA DE STATUS */
+
+header {
+    position: absolute;
+    padding: 2rem;
+
+    display: flex;
+    z-index: 10;
+}
+/* espaço entre os irmãos */
+header * + * {
+    margin-left: 3rem;
+}
+
+header h1 {
+    font-size: 3rem;
+    font-weight: 500;
+}
+
+header img {
+    cursor: pointer;
+}
+
+.status {
+    position: relative;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+
+    padding: 8rem clamp(3rem, 15vw, 15vw) 0;
+
+    min-height: 80vh;
+
+    z-index: 1;
+}
+
+/* filhos diretos */
+.status > * {
+    width: clamp(60rem, 50%, 50%);
+    margin-bottom: 5rem;
+}
+
+#family-view {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem 2rem;
+    justify-content: center;
+}
+/* cada um dos membros */
+#family-view > div {
+    /* border: 1px solid black; */
+    padding: 1rem;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#family-view > *:nth-child(odd) {
+    border-right: 1px solid #9b957c;
+}
+
+#family-view > div > * + * {
+    margin-top: 1.5rem;
+}
+
+#family-view > div > strong {
+    font-weight: 400;
+    font-style: italic;
+    text-transform: lowercase;
+    color: rgb(134, 87, 87);
+    margin-top: 0.5rem;
+    margin-bottom: 2rem;
+}
+
+.bar {
+    position: relative;
+    
+    width: 80%;
+    background-color: #e2decd;
+
+    display: flex;
+    align-items: center;
+
+    height: 2.5rem;
+}
+
+.bar p {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+}
+
+.bar div {
+    background-color: rgb(189, 209, 197);
+    height: 100%;
+    /* usa a variável definida no html */
+    width: var(--fill);
+}
+
+#family-view > div > *:last-child {
+    border-top: 1px solid rgb(199, 199, 199);
+
+    padding: 1rem 2rem 0;
+    width: max-content;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    line-height: 2.5rem;
+}
+
+#house-view {
+    flex: 1;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#house-view > div {
+    width: 100%;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#house-view > * + * {
+    margin-top: 5rem;
+}
+
+#house-view > div > * + * {
+    margin-top: 1rem;
+}
+
+#change-view {
+    width: 40rem;
+    text-align: center;
+    margin: 0 auto 5rem;
+    padding: 2rem;
+
+    background-color: rgb(189, 209, 197);
+    cursor: pointer;
+
+    transition: background 200ms;
+}
+#change-view:hover {
+    background-color: rgb(125, 163, 141);
+}
