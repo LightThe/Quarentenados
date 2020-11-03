@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link rel="stylesheet" href="status.css" />
+        <link rel="stylesheet" href="main.css" />
+
+        <title>Quarentenados</title>
+    </head>
+    <body>
+        <!-- Visão atual e opção de menu -->
+        <header>
+            <img src="img/menu.svg" alt="Menu" />
+            <h1>Dividir as Tarefas</h1>
+        </header>
+        <div class="status">
+            <!-- Seção de família -->
+            <div id="family-view">
+                <!-- Cada um dos membros -->
+                <div>
+                    <h1>Catílina Lima</h1>
+
+                    <strong>Bem</strong>
+
+                    <div class="drop-tarefas">
+                        <strong>Tarefa a ser realizada</strong>
+                        <select>
+                            <option value="0">Cuidar da casa</option>
+                            <option value="1">Ir ao mercado</option>
+                            <option value="2">Pagar contas</option>
+                            <option value="3">Comprar medicamentos</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <strong>Deseja</strong>
+                        <span>ir num show de choro</span>
+                    </div>
+
+                    <div>
+                        <strong>Duração</strong>
+                        <span>4 Turnos</span>
+                    </div>
+                </div>
+                <div>
+                    <h1>Leonardo Lima</h1>
+
+                    <strong>Tossindo</strong>
+
+                    <div class="drop-tarefas">
+                        <strong>Tarefa a ser realizada</strong>
+                        <select>
+                            <option value="0">Cuidar da casa</option>
+                            <option value="1">Ir ao mercado</option>
+                            <option value="2">Pagar contas</option>
+                            <option value="3">Comprar medicamentos</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <strong>Deseja</strong>
+                        <span>encotrar a namorada</span>
+                    </div>
+                    <div>
+                        <strong>Duração</strong>
+                        <span>4 Turnos</span>
+                    </div>
+                </div>
+                <div>
+                    <h1>Paola Lima</h1>
+
+                    <strong>Dor de cabeça</strong>
+
+                    <div class="drop-tarefas">
+                        <strong>Tarefa a ser realizada</strong>
+                        <select>
+                            <option value="0">Cuidar da casa</option>
+                            <option value="1">Ir ao mercado</option>
+                            <option value="2">Pagar contas</option>
+                            <option value="3">Comprar medicamentos</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <strong>Deseja</strong>
+                        <span>Evento social</span>
+                    </div>
+                    <div>
+                        <strong>Duração</strong>
+                        <span>4 Turnos</span>
+                    </div>
+                </div>
+                <div>
+                    <h1>Vanessa Lima</h1>
+
+                    <strong>Nauseada</strong>
+
+                    <div class="drop-tarefas">
+                        <strong>Tarefa a ser realizada</strong>
+                        <select>
+                            <option value="0">Cuidar da casa</option>
+                            <option value="1">Ir ao mercado</option>
+                            <option value="2">Pagar contas</option>
+                            <option value="3">Comprar medicamentos</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <strong>Deseja</strong>
+                        <span>Arrumar um pet</span>
+                    </div>
+                    <div>
+                        <strong>Duração</strong>
+                        <span>4 Turnos</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Seção de casa -->
+            <div id="house-view">
+                <div>
+                    <h1>Problemas para Solucionar</h1>
+                </div>
+                <div>
+                    <ul>
+                        <li>Pagar a conta do cartão de crédito</li>
+                        <li>Lavar a roupa da semana</li>
+                        <li>Comprar suco de maracujá</li>
+                        <li>Comprar remédio para tosse</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- Mudar de visão -->
+        <div onclick="location.href='status.html';" id="change-view">Concluir divisão de tarefas (turno)</div>
+    </body>
+</html>
