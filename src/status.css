@@ -18,6 +18,12 @@
         width: clamp(60rem, 50%, 50%);
         margin-bottom: 5rem;
     }
+    .status > p {
+        width: 60%;
+    }
+    .status > img {
+        width: 20%;
+    }
 
 #family-view {
     display: grid;
@@ -61,7 +67,7 @@
             line-height: 2.5rem;
         }
 
-    #family-view > *:nth-child(even) {
+    #family-view > *:nth-child(odd) {
         border-right: 1px solid var(--limites);
     }
 
@@ -150,11 +156,12 @@
     flex-direction: column;
     gap: 2rem 2rem;
     align-items: center;
-    border-radius: 3px;
 }
     .drop-tarefas > select {
-        background-color: var(--fundo-elemento);
+        font-size: 0.8em;
+        background-color: var(--destaque-A);
         width: 100%;
         height: 2.5rem;
-        border-color: var(--destaque-A);
+        border-radius: 3px;
+        border: none;
     }

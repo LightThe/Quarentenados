@@ -1,3 +1,45 @@
-<script>
-    document.onload = location.href="alocacao.html";
-</script>
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link rel="stylesheet" href="status.css" />
+        <link rel="stylesheet" href="main.css" />
+        
+
+        <title>Quarentenados</title>
+    </head>
+    <body>
+        <header>
+            <img src="img/menu.svg" alt="Menu" />
+            <h1>Como jogar</h1>
+        </header>
+        <div class="status">
+            <p>
+                Quarentenados é um jogo de gerenciamento de recursos e sobrevivência.
+            </p>
+            <p>
+                Para vencer o jogo, você precisa fazer com que os personagens passem por uma pandemia
+                isolados em casa, enqaunto toma as medidas de segurança para evitar que eles se contaminem.
+            </p>
+            <p>
+                O jogo começa mostrando o estado de todos os personagens,
+                com informações sobre sua alimentação, saúde mental e, às vezes, um ou outro desejo especial daquele personagem.
+            </p>
+            <img src="img/status1.png" />
+            <p>
+                Ao clicar no botão "Designar tarefas" você controla o que cada personagem fará por aquele turno.
+                Cada ação tem efeitos positivos ou negativos no personagem,
+                além de ter uma chance de contaminação caso ele entre em contato com outras pessoas (por exemplo, indo ao mercado).
+            </p>
+            <img src="img/aloca1.png" />
+            <p>
+                Assim que terminar de controlar o que cada um dos seus personagens querem, clique no botão "Concluir Ações"
+                para avançar para o próximo turno e ver o resultado das suas ações.
+            </p>
+        </div>
+        <div onclick="loadPage('tela-jogo')" id="change-view">Iniciar o jogo!</div>
+    </body>
+    <script src="main.js"></script>
+<!-- <script>document.onload=loadPage("tela-jogo");</script> -->
