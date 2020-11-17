@@ -1,35 +1,61 @@
 class Personagem{
-    constructor(id, nomePrsn, estadoPrsn, desejoPrsn, atividadePrsn){
+    constructor(id, nomePrsn, estadoPrsn, desejoPrsn){
         this.id = id;
         this.nomePrsn = nomePrsn;
         this.estadoPrsn = estadoPrsn;
         this.desejoPrsn = desejoPrsn;
-        this.atividadePrsn = atividadePrsn;
+        this.atividadePrsn = 0;
         this.alimentacaoPrsn = 100;
         this.estadoMentalPrsn = 100;
+        this.acaoAtual;
     }
 }
+//classe para armazenar ações, personagens devem conseguir selecionar uma instância usando o ID
+class Acao{
+    constructor(id, nomeAcao, duracaoAcao, efeitoSaude, efeitoAlim, contaminAcao, estoqueComida){
+        this.id = id;
+        this.nomeAcao = nomeAcao;
+        this.duracaoAcao = duracaoAcao;
+        this.efeitoSaude = efeitoSaude;
+        this.efeitoAlim = efeitoAlim;
+        this.contaminAcao = contaminAcao;
+        this.estoqueComida = estoqueComida;
+    }
+}
+
+// Variáveis de estado
 let sobrenomes = ["Dias", "Lima", "Alves"];
 sobrenome = sobrenomes[Math.floor(Math.random() * 3)];
-// Variáveis de estado
 let personagens = [
-    new Personagem("p01", "Catílina "+sobrenome, "Bem", "Comer Macarrão", "Nenhuma"), 
-    new Personagem("p02", "Leonardo "+sobrenome, "Tossindo", "Ver TV", "Nenhuma"), 
-    new Personagem("p03", "Paola "+sobrenome, "Dor de cabeça", "Sair com os amigos", "Nenhuma"), 
-    new Personagem("p04", "Vanessa "+sobrenome, "Nauseada", "Ir a Academia", "Nenhuma")
+    new Personagem("p01", "Catílina "+sobrenome, "Bem", "Catar Manga", ""), 
+    new Personagem("p02", "Leonardo "+sobrenome, "Bem", "Ver TV", ""), 
+    new Personagem("p03", "Paola "+sobrenome, "Bem", "Sair com os amigos", ""), 
+    new Personagem("p04", "Vanessa "+sobrenome, "Bem", "Ir a Academia", "")
 ];
+let gameState = 'status';
+
+// Referencias armazenadas
 let divFamilia = document.getElementById("family-view");
 let divCasa = document.querySelector("#house-view");
 let titulo = document.querySelector("header > h1");
+let botaoPrincipal = document.querySelector("#change-view");
 let dropdowns = divFamilia.getElementsByClassName("drop-tarefas");
-let gameState = 'status';
 
-/* ESTADO DO JOGO */
 
+/* UTILIDADES */
+
+function loadPage(nomePagina){
+    location.href=nomePagina+'.html';
+}
 function substituirTexto(elemento, campo, valor){
     elemento.innerHTML = elemento.innerHTML.replace("{{"+campo+"}}", valor);
 }
+
+
+/* ESTADO DO JOGO */
+
 function carregaDivsStatus() {
+    //Essa função precisa ser refatorada de uma forma menos burra
     let divModelo = document.getElementById("modelo-personagem");
     
     personagens.forEach(personagem => { 
@@ -53,16 +79,23 @@ function carregaDivsStatus() {
     divModelo.remove();
 }
 
+//A função de avançar turnos, que pega o número da ação selecionada para cada personagem
+function avancarTurno(){
+    personagens.forEach(personagem => {
+        let teste = divFamilia.querySelector("#"+personagem.id);
+        let selectPrsn = teste.querySelector("select");
+        personagem.atividadePrsn = selectPrsn.value;
+    });
+}
+
 
 /* NAVEGAÇÃO */
 
-function loadPage(nomePagina){
-    location.href=nomePagina+'.html';
-}
 function telaAlocacao(){
-    let statusBars = divFamilia.querySelectorAll(".bar");
-
     titulo.innerText = "Alocação de Tarefas";
+    botaoPrincipal.innerText = "Concluir Ações";
+    
+    let statusBars = divFamilia.querySelectorAll(".bar");
     statusBars.forEach(barra => {
         barra.style.display = "none";
     });
@@ -73,9 +106,11 @@ function telaAlocacao(){
     divCasa.style.display = "none";
 }
 function telaStatus(){
-    let statusBars = divFamilia.querySelectorAll(".bar");
 
     titulo.innerText = "Estado da Família";
+    botaoPrincipal.innerText = "Designar Tarefas";
+    
+    let statusBars = divFamilia.querySelectorAll(".bar");
     statusBars.forEach(barra => {
         barra.removeAttribute("style");
     });
@@ -94,8 +129,3 @@ function changeState(){
         gameState = 'alocacao';
     }
 }
-
-// window.onbeforeunload = function() {
-//     var message = 'Ao sair, seu jogo atual será encerrado!';
-//     return message;
-// }
