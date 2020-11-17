@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link rel="stylesheet" href="status.css" />
+        <link rel="stylesheet" href="main.css" />
+        
+
+        <title>Quarentenados</title>
+    </head>
+    <body>
+        <!-- Visão atual e opção de menu -->
+        <header>
+            <img src="img/menu.svg" alt="Menu" />
+            <h1>Estado da Família</h1>
+        </header>
+        <div class="status">
+            <!-- Seção de família -->
+            <div id="family-view">
+                <!-- Cada um dos membros -->
+                <div id="modelo-personagem" style="display: none;">
+                    <h1>{{nomePrsn}}</h1>
+
+                    <strong>{{estadoPrsn}}</strong>
+
+                    <div class="bar">
+                        <p>Alimentação</p>
+                        <div style="--fill: 82%"></div>
+                    </div>
+                    <div class="bar">
+                        <p>Estado Mental</p>
+                        <div style="--fill: 63%"></div>
+                    </div>
+
+                    <div>
+                        <strong>Deseja</strong>
+                        <span>{{desejoPrsn}}</span>
+                    </div>
+                    <div>
+                        <strong>Atividade atual</strong>
+                        <span>{{atividadePrsn}}</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Seção de casa -->
+            <div id="house-view">
+                <div>
+                    <h1>Estado da Casa</h1>
+                    <div class="bar">
+                        <div style="--fill: 68%"></div>
+                    </div>
+                </div>
+                <div>
+                    <h1>Recursos</h1>
+                    <div class="bar">
+                        <p>Alimento</p>
+                        <div style="--fill: 23%"></div>
+                    </div>
+                    <div class="bar">
+                        <p>Tesouro</p>
+                        <div style="--fill: 54%"></div>
+                    </div>
+                    <div class="bar">
+                        <p>Medicamento</p>
+                        <div style="--fill: 77%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Mudar de visão -->
+        <div onclick="location.href='alocacao.html';" id="change-view">Voltar a designar tarefas</div>
+    </body>
+    <script src="main.js"></script>
+</html>
