@@ -13,12 +13,11 @@
 
     z-index: 1;
 }
-
-/* filhos diretos */
-.status > * {
-    width: clamp(60rem, 50%, 50%);
-    margin-bottom: 5rem;
-}
+    /* filhos diretos */
+    .status > * {
+        width: clamp(60rem, 50%, 50%);
+        margin-bottom: 5rem;
+    }
 
 #family-view {
     display: grid;
@@ -26,32 +25,45 @@
     gap: 2rem 2rem;
     justify-content: center;
 }
-/* cada um dos membros */
-#family-view > div {
-    /* border: 1px solid black; */
-    padding: 1rem;
+    /* cada um dos membros */
+    #family-view > div {
+        /* border: 1px solid black; */
+        padding: 1rem;
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+        #family-view > div > * + * {
+            margin-top: 1.5rem;
+        }
 
-#family-view > *:nth-child(odd) {
-    border-right: 1px solid var(--limites);
-}
+        #family-view > div > strong {
+            font-weight: 400;
+            font-style: italic;
+            text-transform: lowercase;
+            color: var(--destaque-B);
+            margin-top: 0.5rem;
+            margin-bottom: 2rem;
+        }
 
-#family-view > div > * + * {
-    margin-top: 1.5rem;
-}
+        #family-view > div > *:last-child {
+            /* border-top: 1px solid rgb(199, 199, 199); */
+            border-top: 1px solid var(--limites);
 
-#family-view > div > strong {
-    font-weight: 400;
-    font-style: italic;
-    text-transform: lowercase;
-    color: var(--destaque-B);
-    margin-top: 0.5rem;
-    margin-bottom: 2rem;
-}
+            padding: 1rem 2rem 0;
+            width: max-content;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            line-height: 2.5rem;
+        }
+
+    #family-view > *:nth-child(even) {
+        border-right: 1px solid var(--limites);
+    }
 
 .bar {
     position: relative;
@@ -66,35 +78,21 @@
 
     border-radius: 3px;
 }
+    .bar p {
+        position: absolute;
+        width: 100%;
+        text-align: center;
+    }
 
-.bar p {
-    position: absolute;
-    width: 100%;
-    text-align: center;
-}
+    .bar div {
+        background-color: var(--destaque-A);
+        height: 100%;
+        /* usa a variável definida no html */
+        width: var(--fill);
 
-.bar div {
-    background-color: var(--destaque-A);
-    height: 100%;
-    /* usa a variável definida no html */
-    width: var(--fill);
+        border-radius: 3px;
+    }
 
-    border-radius: 3px;
-}
-
-#family-view > div > *:last-child {
-    /* border-top: 1px solid rgb(199, 199, 199); */
-    border-top: 1px solid var(--limites);
-
-    padding: 1rem 2rem 0;
-    width: max-content;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    line-height: 2.5rem;
-}
 
 #house-view {
     flex: 1;
@@ -103,22 +101,30 @@
     flex-direction: column;
     align-items: center;
 }
+    #house-view > div {
+        width: 100%;
 
-#house-view > div {
-    width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+        #house-view > div > * + * {
+            margin-top: 1rem;
+        }
+        
+    #house-view > * + * {
+        margin-top: 5rem;
+    }
 
-#house-view > * + * {
-    margin-top: 5rem;
-}
+    #house-view ul{
+        padding: 5rem;
+        width: 100%;
+        background-color: var(--fundo-elemento);
+        border: 1px solid var(--destaque-A);
+        border-radius: 3px;
+    }
 
-#house-view > div > * + * {
-    margin-top: 1rem;
-}
 
 #change-view {
     width: 40rem;
@@ -132,9 +138,9 @@
 
     transition: background 200ms;
 }
-#change-view:hover {
-    background-color: var(--destaque-A-alt);
-}
+    #change-view:hover {
+        background-color: var(--destaque-A-alt);
+    }
 
 
 /* Adicionais para página de alocação */
@@ -152,11 +158,3 @@
         height: 2.5rem;
         border-color: var(--destaque-A);
     }
-
-#house-view ul{
-    padding: 5rem;
-    width: 100%;
-    background-color: var(--fundo-elemento);
-    border: 1px solid var(--destaque-A);
-    border-radius: 3px;
-}

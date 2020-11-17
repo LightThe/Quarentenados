@@ -7,6 +7,7 @@
 :root {
     
     --fundo: #f3efdd;
+    --texto-padrao: rgb(41, 33, 5);
     --fundo-elemento: #e2decd;
     --destaque-A:  rgb(189, 209, 197);
     --destaque-A-alt:  rgb(125, 163, 141);
@@ -18,7 +19,7 @@
 
 body {
     min-height: 100vh;
-    color: rgb(41, 33, 5);
+    color: var(--texto-padrao);
 
     background: var(--fundo);
 }
