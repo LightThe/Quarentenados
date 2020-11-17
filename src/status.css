@@ -61,7 +61,7 @@
             line-height: 2.5rem;
         }
 
-    #family-view > *:nth-child(even) {
+    #family-view > *:nth-child(odd) {
         border-right: 1px solid var(--limites);
     }
 

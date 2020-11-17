@@ -1,2 +1,0 @@
-- deixar o index e o status na palheta de cores escolhida
-- mudar o index para o padrão flexbox

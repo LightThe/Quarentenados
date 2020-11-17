@@ -1,5 +1,6 @@
 class Personagem{
-    constructor(nomePrsn, estadoPrsn, desejoPrsn, atividadePrsn){
+    constructor(id, nomePrsn, estadoPrsn, desejoPrsn, atividadePrsn){
+        this.id = id;
         this.nomePrsn = nomePrsn;
         this.estadoPrsn = estadoPrsn;
         this.desejoPrsn = desejoPrsn;
@@ -8,34 +9,93 @@ class Personagem{
         this.estadoMentalPrsn = 100;
     }
 }
-
-var personagens = [
-    new Personagem("Catílina Lima", "Bem", "Comer Macarrão", "Nenhuma"), 
-    new Personagem("Leonardo Lima", "Tossindo", "Ver TV", "Nenhuma"), 
-    new Personagem("Paola Lima", "Dor de cabeça", "Sair com os amigos", "Nenhuma"), 
-    new Personagem("Vanessa Lima", "Nauseada", "Ir a Academia", "Nenhuma")
+let sobrenomes = ["Dias", "Lima", "Alves"];
+sobrenome = sobrenomes[Math.floor(Math.random() * 3)];
+// Variáveis de estado
+let personagens = [
+    new Personagem("p01", "Catílina "+sobrenome, "Bem", "Comer Macarrão", "Nenhuma"), 
+    new Personagem("p02", "Leonardo "+sobrenome, "Tossindo", "Ver TV", "Nenhuma"), 
+    new Personagem("p03", "Paola "+sobrenome, "Dor de cabeça", "Sair com os amigos", "Nenhuma"), 
+    new Personagem("p04", "Vanessa "+sobrenome, "Nauseada", "Ir a Academia", "Nenhuma")
 ];
-var familyDiv = document.getElementById("family-view");
+let divFamilia = document.getElementById("family-view");
+let divCasa = document.querySelector("#house-view");
+let titulo = document.querySelector("header > h1");
+let dropdowns = divFamilia.getElementsByClassName("drop-tarefas");
+let gameState = 'status';
 
+/* ESTADO DO JOGO */
+
+function substituirTexto(elemento, campo, valor){
+    elemento.innerHTML = elemento.innerHTML.replace("{{"+campo+"}}", valor);
+}
 function carregaDivsStatus() {
+    let divModelo = document.getElementById("modelo-personagem");
+    
     personagens.forEach(personagem => { 
-        var divPersonagem = document.getElementById("modelo-personagem");
+        let clonediv = divModelo.cloneNode(true);
+        clonediv.id = personagem.id;
+        
+        substituirTexto(clonediv, "nomePrsn", personagem.nomePrsn);
+        substituirTexto(clonediv, "estadoPrsn", personagem.estadoPrsn);
+        substituirTexto(clonediv, "desejoPrsn", personagem.desejoPrsn);
+        substituirTexto(clonediv, "atividadePrsn", personagem.atividadePrsn);
 
-        var clonediv = divPersonagem.cloneNode(true);
-        clonediv.id = personagem.nomePrsn;
-        clonediv.removeAttribute("style");
-        clonediv.innerHTML = clonediv.innerHTML.replace("{{nomePrsn}}", personagem.nomePrsn);
-        clonediv.innerHTML = clonediv.innerHTML.replace("{{estadoPrsn}}", personagem.estadoPrsn);
-        clonediv.innerHTML = clonediv.innerHTML.replace("{{desejoPrsn}}", personagem.desejoPrsn);
-        clonediv.innerHTML = clonediv.innerHTML.replace("{{atividadePrsn}}", personagem.atividadePrsn);
-        // TODO: refatorar esse monte de replace em alguma coisa mais limpa, por enquanto funciona
-        var statusBars = clonediv.getElementsByClassName("bar");
-        var barraAlimento = statusBars[0].children[1]
-        var barraEstdMental = statusBars[1].children[1]
+        let statusBars = clonediv.getElementsByClassName("bar");
+        let barraAlimento = statusBars[0].children[1]
+        let barraEstdMental = statusBars[1].children[1]
         barraAlimento.outerHTML = barraAlimento.outerHTML.replace("--fill: 82%", "--fill: "+personagem.alimentacaoPrsn+"%");
         barraEstdMental.outerHTML = barraEstdMental.outerHTML.replace("--fill: 63%", "--fill: "+personagem.estadoMentalPrsn+"%");
         
-        familyDiv.appendChild(clonediv);
+        clonediv.removeAttribute("style");
+        divFamilia.appendChild(clonediv);
     });
+    divModelo.remove();
 }
-document.onload = carregaDivsStatus();
+
+
+/* NAVEGAÇÃO */
+
+function loadPage(nomePagina){
+    location.href=nomePagina+'.html';
+}
+function telaAlocacao(){
+    let statusBars = divFamilia.querySelectorAll(".bar");
+
+    titulo.innerText = "Alocação de Tarefas";
+    statusBars.forEach(barra => {
+        barra.style.display = "none";
+    });
+    for(let item of dropdowns){
+        item.removeAttribute("style");
+    }
+
+    divCasa.style.display = "none";
+}
+function telaStatus(){
+    let statusBars = divFamilia.querySelectorAll(".bar");
+
+    titulo.innerText = "Estado da Família";
+    statusBars.forEach(barra => {
+        barra.removeAttribute("style");
+    });
+    for(let item of dropdowns){
+        item.style.display = "none";
+    }
+
+    divCasa.removeAttribute("style");
+}
+function changeState(){
+    if (gameState == 'alocacao') {
+        telaStatus();
+        gameState = 'status';
+    } else {
+        telaAlocacao();
+        gameState = 'alocacao';
+    }
+}
+
+// window.onbeforeunload = function() {
+//     var message = 'Ao sair, seu jogo atual será encerrado!';
+//     return message;
+// }

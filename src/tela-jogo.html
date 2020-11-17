@@ -34,6 +34,16 @@
                         <div style="--fill: 63%"></div>
                     </div>
 
+                    <div class="drop-tarefas" style="display: none;">
+                        <strong>Tarefa a ser realizada</strong>
+                        <select>
+                            <option value="0">Cuidar da casa (1 turno)</option>
+                            <option value="1">Ir ao mercado (1 turno)</option>
+                            <option value="2">Pagar contas (1 turno)</option>
+                            <option value="3">Comprar medicamentos (1 turno)</option>
+                        </select>
+                    </div>
+
                     <div>
                         <strong>Deseja</strong>
                         <span>{{desejoPrsn}}</span>
@@ -71,7 +81,8 @@
             </div>
         </div>
         <!-- Mudar de visão -->
-        <div onclick="location.href='alocacao.html';" id="change-view">Voltar a designar tarefas</div>
+        <div onclick="changeState()" id="change-view">Voltar a designar tarefas</div>
     </body>
     <script src="main.js"></script>
+    <script>document.onload = carregaDivsStatus();</script>
 </html>
