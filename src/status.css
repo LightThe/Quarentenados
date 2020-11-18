@@ -1,5 +1,5 @@
 /* PAGINA DE STATUS */
-.status {
+main {
     position: relative;
 
     display: flex;
@@ -14,14 +14,14 @@
     z-index: 1;
 }
     /* filhos diretos */
-    .status > * {
+    main > * {
         width: clamp(60rem, 50%, 50%);
         margin-bottom: 5rem;
     }
-    .status > p {
+    main > p {
         width: 60%;
     }
-    .status > img {
+    main > img {
         width: 20%;
     }
 
@@ -30,6 +30,8 @@
     grid-template-columns: 1fr 1fr;
     gap: 2rem 2rem;
     justify-content: center;
+
+    text-align: center;
 }
     /* cada um dos membros */
     #family-view > div {
@@ -165,3 +167,16 @@
         border-radius: 3px;
         border: none;
     }
+
+/* some o que tem q sumir em cada tela */
+main.status .drop-tarefas {
+    display: none;
+}
+
+main.alocacao .bar {
+    display: none;
+}
+
+main.alocacao #house-view {
+    display: none;
+}
