@@ -118,9 +118,6 @@ const dropdowns = divFamilia.getElementsByClassName("drop-tarefas")
 function loadPage(nomePagina) {
     location.href = nomePagina + ".html"
 }
-function substituirTexto(elemento, campo, valor) {
-    elemento.innerHTML = elemento.innerHTML.replace("{{" + campo + "}}", valor)
-}
 
 /* AÇÕES */
 // cada objeto representa uma ação. Seus campos "efeitos" representam as mudanças que ele realiza
@@ -400,35 +397,18 @@ function atualizaAcoes(modelo) {
 }
 
 function carregaDivsStatus() {
-    //Essa função precisa ser refatorada de uma forma menos burra
     const modelo = document.getElementById("modelo-personagem")
     atualizaAcoes(modelo)
 
     personagens.forEach((personagem, id) => {
         const clone = modelo.cloneNode(true)
         clone.id = `p${id}`
-
-        substituirTexto(clone, "nome", personagem.nome)
-        substituirTexto(clone, "saude", personagem.info.saude)
-        substituirTexto(clone, "desejo", personagem.info.desejo)
-        substituirTexto(clone, "atividade", personagem.atividade)
-
-        const statusBars = clone.getElementsByClassName("bar")
-        const barraAlimento = statusBars[0].children[1]
-        const barraEstdMental = statusBars[1].children[1]
-        barraAlimento.outerHTML = barraAlimento.outerHTML.replace(
-            "--fill: 82%",
-            "--fill: " + personagem.estado.alimentacao + "%"
-        )
-        barraEstdMental.outerHTML = barraEstdMental.outerHTML.replace(
-            "--fill: 63%",
-            "--fill: " + personagem.estado.mental + "%"
-        )
-
+        clone.querySelector('h1').innerHTML = personagem.nome
         clone.classList.remove("hidden")
         divFamilia.appendChild(clone)
-    })
+    })    
     modelo.remove()
+    atualizaTela()
 }
 
 function validarAcoes() {
