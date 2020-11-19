@@ -32,7 +32,7 @@ textarea {
 }
 
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 /* HEADER */
@@ -56,4 +56,23 @@ header h1 {
 
 header img {
     cursor: pointer;
+}
+
+#gif-carregando {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100vw;
+    height: 100vh;
+
+    z-index: 100;
+
+    opacity: 0;
+    display: none;
+    transition: opacity 300ms;
+}
+
+#gif-carregando.ativo {
+    display: initial;
+    opacity: 1;
 }

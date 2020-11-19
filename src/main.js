@@ -83,20 +83,28 @@ const nomes = [
     "Quésia"
 ]
 sobrenome = sobrenomes[Math.floor(Math.random() * sobrenomes.length)]
-const personagens = [
-    new Personagem(
-        nomes[Math.floor(Math.random() * nomes.length)] + " " + sobrenome
-    ),
-    new Personagem(
-        nomes[Math.floor(Math.random() * nomes.length)] + " " + sobrenome
-    ),
-    new Personagem(
-        nomes[Math.floor(Math.random() * nomes.length)] + " " + sobrenome
-    ),
-    new Personagem(
-        nomes[Math.floor(Math.random() * nomes.length)] + " " + sobrenome
-    )
-]
+
+// popula os personagens
+if (localStorage.getItem("personagens")) {
+    personagens = JSON.parse(localStorage.getItem("personagens"))
+} else {
+    personagens = [
+        new Personagem(
+            nomes[Math.floor(Math.random() * nomes.length)] + " " + sobrenome
+        ),
+        new Personagem(
+            nomes[Math.floor(Math.random() * nomes.length)] + " " + sobrenome
+        ),
+        new Personagem(
+            nomes[Math.floor(Math.random() * nomes.length)] + " " + sobrenome
+        ),
+        new Personagem(
+            nomes[Math.floor(Math.random() * nomes.length)] + " " + sobrenome
+        )
+    ]
+    localStorage.setItem("personagens", JSON.stringify(personagens))
+}
+
 const casa = {
     alimento: 75,
     dinheiro: 75,
@@ -343,9 +351,9 @@ function atualizaTela() {
     function atualizaCampos(dicionario, container, callback) {
         Object.keys(dicionario).forEach((atributo) => {
             elemento = container.querySelector(`._${atributo}`)
-            console.log(
-                `Campo: ${atributo} | Valor: ${dicionario[atributo]} | Elemento: ${elemento}`
-            )
+            // console.log(
+            //     `Campo: ${atributo} | Valor: ${dicionario[atributo]} | Elemento: ${elemento}`
+            // )
             // como ainda não se sabe a maneira correta de atualizar esse elemento, usamos um callback
             // passamos o elemento e o valor consultado no dicionario que ele irá receber (talvez no innerHTML, talvez no campo value, etc)
             callback(elemento, dicionario[atributo])
@@ -354,7 +362,7 @@ function atualizaTela() {
 
     // Atualiza a visão dos personagens
     personagens.forEach((personagem, id) => {
-        console.log(personagem, id)
+        // console.log(personagem, id)
         const divPersonagem = divFamilia.querySelector(`#p${id}`)
         // Atualiza campos de texto
         atualizaCampos(
@@ -403,10 +411,10 @@ function carregaDivsStatus() {
     personagens.forEach((personagem, id) => {
         const clone = modelo.cloneNode(true)
         clone.id = `p${id}`
-        clone.querySelector('h1').innerHTML = personagem.nome
+        clone.querySelector("h1").innerHTML = personagem.nome
         clone.classList.remove("hidden")
         divFamilia.appendChild(clone)
-    })    
+    })
     modelo.remove()
     atualizaTela()
 }
@@ -466,9 +474,15 @@ function avancarTurno() {
     })
     // Desconta do estado da casa
     casa.estado -= 20
-    
+
     atualizaTela()
     changeState()
+}
+
+function mostraGIF() {
+    console.log("Foi")
+    gif = document.getElementById("gif-carregando")
+    gif.classList = ["ativo"]
 }
 
 /* NAVEGAÇÃO */
