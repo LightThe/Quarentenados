@@ -16,41 +16,36 @@
             <img src="img/menu.svg" alt="Menu" />
             <h1>Estado da Família</h1>
         </header>
-        <div class="status">
+        <main class="status">
             <!-- Seção de família -->
             <div id="family-view">
                 <!-- Cada um dos membros -->
-                <div id="modelo-personagem" style="display: none;">
-                    <h1>{{nomePrsn}}</h1>
+                <div id="modelo-personagem" class="hidden">
+                    <h1>{{nome}}</h1>
 
-                    <strong>{{estadoPrsn}}</strong>
+                    <strong class="_saude">{{saude}}</strong>
 
                     <div class="bar">
                         <p>Alimentação</p>
-                        <div style="--fill: 82%"></div>
+                        <div style="--fill: 82%" class="_alimentacao"></div>
                     </div>
                     <div class="bar">
                         <p>Saúde Mental</p>
-                        <div style="--fill: 63%"></div>
+                        <div style="--fill: 63%" class="_mental"></div>
                     </div>
 
-                    <div class="drop-tarefas" style="display: none;">
+                    <div class="drop-tarefas" class="hidden">
                         <strong>Tarefa a ser realizada</strong>
-                        <select>
-                            <option value="0">Cuidar da casa (1 turno)</option>
-                            <option value="1">Ir ao mercado (1 turno)</option>
-                            <option value="2">Pagar contas (1 turno)</option>
-                            <option value="3">Comprar medicamentos (1 turno)</option>
-                        </select>
+                        <select></select>
                     </div>
 
                     <div>
                         <strong>Deseja</strong>
-                        <span>{{desejoPrsn}}</span>
+                        <span class="_desejo">{{desejo}}</span>
                     </div>
                     <div>
                         <strong>Atividade atual</strong>
-                        <span>{{atividadePrsn}}</span>
+                        <span class="_atividade">{{atividade}}</span>
                     </div>
                 </div>
             </div>
@@ -60,26 +55,26 @@
                 <div>
                     <h1>Estado da Casa</h1>
                     <div class="bar">
-                        <div style="--fill: 68%"></div>
+                        <div class="_estado" style="--fill: 68%"></div>
                     </div>
                 </div>
                 <div>
                     <h1>Recursos</h1>
                     <div class="bar">
                         <p>Alimento</p>
-                        <div style="--fill: 23%"></div>
+                        <div class="_alimento" style="--fill: 23%"></div>
                     </div>
                     <div class="bar">
-                        <p>Tesouro</p>
-                        <div style="--fill: 54%"></div>
+                        <p>Dinheiro</p>
+                        <div class="_dinheiro" style="--fill: 54%"></div>
                     </div>
                     <div class="bar">
                         <p>Medicamento</p>
-                        <div style="--fill: 77%"></div>
+                        <div class="_medicamento" style="--fill: 77%"></div>
                     </div>
                 </div>
             </div>
-        </div>
+        </main>
         <!-- Mudar de visão -->
         <div onclick="changeState()" id="change-view">Designar Tarefas</div>
     </body>

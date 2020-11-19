@@ -31,6 +31,10 @@ textarea {
     font: 400 1.8rem/1 sans-serif;
 }
 
+.hidden {
+    display: none;
+}
+
 /* HEADER */
 
 header {
