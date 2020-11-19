@@ -83,27 +83,39 @@ const nomes = [
     "Quésia"
 ]
 sobrenome = sobrenomes[Math.floor(Math.random() * sobrenomes.length)]
-const personagens = [
-    new Personagem(
-        nomes[Math.floor(Math.random() * nomes.length)] + " " + sobrenome
-    ),
-    new Personagem(
-        nomes[Math.floor(Math.random() * nomes.length)] + " " + sobrenome
-    ),
-    new Personagem(
-        nomes[Math.floor(Math.random() * nomes.length)] + " " + sobrenome
-    ),
-    new Personagem(
-        nomes[Math.floor(Math.random() * nomes.length)] + " " + sobrenome
-    )
-]
-const casa = {
-    alimento: 75,
-    dinheiro: 75,
-    medicamento: 75,
-    estado: 100
-}
+
+let casa
+let personagens
 let gameState = "status"
+
+// popula os personagens
+// tenta ler da máquina
+if (localStorage.getItem("jogo")) {
+    personagens = JSON.parse(localStorage.getItem("jogo")).personagens
+    casa = JSON.parse(localStorage.getItem("jogo")).casa
+} else {
+    personagens = [
+        new Personagem(
+            nomes[Math.floor(Math.random() * nomes.length)] + " " + sobrenome
+        ),
+        new Personagem(
+            nomes[Math.floor(Math.random() * nomes.length)] + " " + sobrenome
+        ),
+        new Personagem(
+            nomes[Math.floor(Math.random() * nomes.length)] + " " + sobrenome
+        ),
+        new Personagem(
+            nomes[Math.floor(Math.random() * nomes.length)] + " " + sobrenome
+        )
+    ]
+    casa = {
+        alimento: 75,
+        dinheiro: 75,
+        medicamento: 75,
+        estado: 100
+    }
+    persistir()
+}
 
 // Referencias armazenadas
 const divFamilia = document.getElementById("family-view")
@@ -117,6 +129,9 @@ const dropdowns = divFamilia.getElementsByClassName("drop-tarefas")
 
 function loadPage(nomePagina) {
     location.href = nomePagina + ".html"
+}
+function persistir() {
+    localStorage.setItem("jogo", JSON.stringify({ personagens, casa }))
 }
 
 /* AÇÕES */
@@ -343,9 +358,9 @@ function atualizaTela() {
     function atualizaCampos(dicionario, container, callback) {
         Object.keys(dicionario).forEach((atributo) => {
             elemento = container.querySelector(`._${atributo}`)
-            console.log(
-                `Campo: ${atributo} | Valor: ${dicionario[atributo]} | Elemento: ${elemento}`
-            )
+            // console.log(
+            //     `Campo: ${atributo} | Valor: ${dicionario[atributo]} | Elemento: ${elemento}`
+            // )
             // como ainda não se sabe a maneira correta de atualizar esse elemento, usamos um callback
             // passamos o elemento e o valor consultado no dicionario que ele irá receber (talvez no innerHTML, talvez no campo value, etc)
             callback(elemento, dicionario[atributo])
@@ -354,7 +369,7 @@ function atualizaTela() {
 
     // Atualiza a visão dos personagens
     personagens.forEach((personagem, id) => {
-        console.log(personagem, id)
+        // console.log(personagem, id)
         const divPersonagem = divFamilia.querySelector(`#p${id}`)
         // Atualiza campos de texto
         atualizaCampos(
@@ -403,10 +418,10 @@ function carregaDivsStatus() {
     personagens.forEach((personagem, id) => {
         const clone = modelo.cloneNode(true)
         clone.id = `p${id}`
-        clone.querySelector('h1').innerHTML = personagem.nome
+        clone.querySelector("h1").innerHTML = personagem.nome
         clone.classList.remove("hidden")
         divFamilia.appendChild(clone)
-    })    
+    })
     modelo.remove()
     atualizaTela()
 }
@@ -466,37 +481,43 @@ function avancarTurno() {
     })
     // Desconta do estado da casa
     casa.estado -= 20
-    
+
     atualizaTela()
-    changeState()
+    persistir()
+}
+
+function mostraGIF() {
+    gif = document.getElementById("gif-carregando")
+
+    gif.classList = ["ativa"]
+    setTimeout(() => {
+        gif.classList = ["desativa"]
+        setTimeout(() => (gif.classList = []), 1000)
+    }, 2000)
 }
 
 /* NAVEGAÇÃO */
 
-function telaAlocacao() {
-    titulo.innerText = "Alocação de Tarefas"
-    botaoPrincipal.innerText = "Concluir Ações"
+function tela(tit, botao) {
+    titulo.innerText = tit
+    botaoPrincipal.innerText = botao
 
-    botaoPrincipal.onclick = avancarTurno
-
-    document.getElementsByTagName("main")[0].classList = [gameState]
-}
-
-function telaStatus() {
-    titulo.innerText = "Estado da Família"
-    botaoPrincipal.innerText = "Designar Tarefas"
-
-    botaoPrincipal.onclick = changeState
-
+    console.log(gameState)
     document.getElementsByTagName("main")[0].classList = [gameState]
 }
 
 function changeState() {
     if (gameState == "alocacao") {
+        mostraGIF()
         gameState = "status"
-        telaStatus()
+        console.log(gameState)
+        // Espera a animação acontecer
+        setTimeout(() => {
+            avancarTurno()
+            tela("Estado da Família", "Designar Tarefas")
+        }, 1000)
     } else {
         gameState = "alocacao"
-        telaAlocacao()
+        tela("Alocação de Tarefas", "Concluir Ações")
     }
 }

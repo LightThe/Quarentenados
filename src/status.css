@@ -172,11 +172,3 @@ main {
 main.status .drop-tarefas {
     display: none;
 }
-
-main.alocacao .bar {
-    display: none;
-}
-
-main.alocacao #house-view {
-    display: none;
-}

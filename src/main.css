@@ -5,14 +5,13 @@
 }
 
 :root {
-    
     --fundo: #f3efdd;
     --texto-padrao: rgb(41, 33, 5);
     --fundo-elemento: #e2decd;
-    --destaque-A:  rgb(189, 209, 197);
-    --destaque-A-alt:  rgb(125, 163, 141);
-    --limites:  #9b957c;
-    --destaque-B:  rgb(134, 87, 87);
+    --destaque-A: rgb(189, 209, 197);
+    --destaque-A-alt: rgb(125, 163, 141);
+    --limites: #9b957c;
+    --destaque-B: rgb(134, 87, 87);
 
     font-size: 10px;
 }
@@ -32,7 +31,7 @@ textarea {
 }
 
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 /* HEADER */
@@ -56,4 +55,45 @@ header h1 {
 
 header img {
     cursor: pointer;
+}
+
+#gif-carregando {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100vw;
+    height: 100vh;
+
+    display: none;
+    z-index: 100;
+}
+
+#gif-carregando.ativa {
+    display: initial;
+    animation-name: aparecer;
+    animation-duration: 1s;
+    animation-fill-mode: both;
+}
+#gif-carregando.desativa {
+    display: initial;
+    animation-name: desaparecer;
+    animation-duration: 1s;
+    animation-fill-mode: both;
+}
+
+@keyframes aparecer {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+@keyframes desaparecer {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
 }

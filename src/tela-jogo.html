@@ -21,9 +21,9 @@
             <div id="family-view">
                 <!-- Cada um dos membros -->
                 <div id="modelo-personagem" class="hidden">
-                    <h1>{{nome}}</h1>
+                    <h1></h1>
 
-                    <strong class="_saude">{{saude}}</strong>
+                    <strong class="_saude"></strong>
 
                     <div class="bar">
                         <p>Alimentação</p>
@@ -39,13 +39,13 @@
                         <select></select>
                     </div>
 
-                    <div>
+                    <div class="hidden">
                         <strong>Deseja</strong>
-                        <span class="_desejo">{{desejo}}</span>
+                        <span class="_desejo"></span>
                     </div>
-                    <div>
+                    <div class="hidden">
                         <strong>Atividade atual</strong>
-                        <span class="_atividade">{{atividade}}</span>
+                        <span class="_atividade"></span>
                     </div>
                 </div>
             </div>
@@ -68,7 +68,7 @@
                         <p>Dinheiro</p>
                         <div class="_dinheiro" style="--fill: 54%"></div>
                     </div>
-                    <div class="bar">
+                    <div class="bar hidden">
                         <p>Medicamento</p>
                         <div class="_medicamento" style="--fill: 77%"></div>
                     </div>
@@ -77,6 +77,7 @@
         </main>
         <!-- Mudar de visão -->
         <div onclick="changeState()" id="change-view">Designar Tarefas</div>
+        <img id="gif-carregando" src="img/aloca1.png" alt="Carregando...">
     </body>
     <script src="main.js"></script>
     <script>document.onload = carregaDivsStatus();</script>
