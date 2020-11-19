@@ -84,9 +84,14 @@ const nomes = [
 ]
 sobrenome = sobrenomes[Math.floor(Math.random() * sobrenomes.length)]
 
-let casa
-let personagens
-let gameState = "status"
+let casa;
+let personagens;
+let game = {
+    state: "status",
+    turnos: 0,
+    finalRuim: false,
+    nomeFamilia: ""
+};
 
 // popula os personagens
 // tenta ler da máquina
@@ -482,6 +487,9 @@ function avancarTurno() {
     // Desconta do estado da casa
     casa.estado -= 20
 
+    // Atualiza o contador de turnos
+    game.turnos ++;
+
     atualizaTela()
     persistir()
 }
@@ -502,20 +510,28 @@ function tela(tit, botao) {
     titulo.innerText = tit
     botaoPrincipal.innerText = botao
 
-    document.getElementsByTagName("main")[0].classList = [gameState]
+    document.getElementsByTagName("main")[0].classList = [game.state]
 }
 
 function changeState() {
-    if (gameState == "alocacao") {
+    let maxTurnos = 10;
+    if (game.state == "alocacao") {
         mostraGIF()
-        gameState = "status"
+        game.state = "status"
         // Espera a animação acontecer
         setTimeout(() => {
             avancarTurno()
             tela("Estado da Família", "Designar Tarefas")
         }, 1000)
     } else {
-        gameState = "alocacao"
+        //Verifica se ele pode terminar o jogo
+        if(game.turnos >= maxTurnos){
+            game.nomeFamilia = personagens[0].nome.split(" ")[1]; // Todas as vezes a variavel sobrenome vem diferente do da família, portanto fiz esse gato.
+            localStorage.setItem("gameState", JSON.stringify(game));
+            loadPage('fim-jogo');
+        }
+        //Continua o jogo
+        game.state = "alocacao"
         tela("Alocação de Tarefas", "Concluir Ações")
     }
 }
