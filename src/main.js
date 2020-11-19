@@ -502,7 +502,6 @@ function tela(tit, botao) {
     titulo.innerText = tit
     botaoPrincipal.innerText = botao
 
-    console.log(gameState)
     document.getElementsByTagName("main")[0].classList = [gameState]
 }
 
@@ -510,7 +509,6 @@ function changeState() {
     if (gameState == "alocacao") {
         mostraGIF()
         gameState = "status"
-        console.log(gameState)
         // Espera a animação acontecer
         setTimeout(() => {
             avancarTurno()
