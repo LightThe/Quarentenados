@@ -84,9 +84,15 @@ const nomes = [
 ]
 sobrenome = sobrenomes[Math.floor(Math.random() * sobrenomes.length)]
 
+let casa
+let personagens
+let gameState = "status"
+
 // popula os personagens
-if (localStorage.getItem("personagens")) {
-    personagens = JSON.parse(localStorage.getItem("personagens"))
+// tenta ler da máquina
+if (localStorage.getItem("jogo")) {
+    personagens = JSON.parse(localStorage.getItem("jogo")).personagens
+    casa = JSON.parse(localStorage.getItem("jogo")).casa
 } else {
     personagens = [
         new Personagem(
@@ -102,16 +108,14 @@ if (localStorage.getItem("personagens")) {
             nomes[Math.floor(Math.random() * nomes.length)] + " " + sobrenome
         )
     ]
-    localStorage.setItem("personagens", JSON.stringify(personagens))
+    casa = {
+        alimento: 75,
+        dinheiro: 75,
+        medicamento: 75,
+        estado: 100
+    }
+    persistir()
 }
-
-const casa = {
-    alimento: 75,
-    dinheiro: 75,
-    medicamento: 75,
-    estado: 100
-}
-let gameState = "status"
 
 // Referencias armazenadas
 const divFamilia = document.getElementById("family-view")
@@ -125,6 +129,9 @@ const dropdowns = divFamilia.getElementsByClassName("drop-tarefas")
 
 function loadPage(nomePagina) {
     location.href = nomePagina + ".html"
+}
+function persistir() {
+    localStorage.setItem("jogo", JSON.stringify({ personagens, casa }))
 }
 
 /* AÇÕES */
@@ -476,41 +483,41 @@ function avancarTurno() {
     casa.estado -= 20
 
     atualizaTela()
-    changeState()
+    persistir()
 }
 
 function mostraGIF() {
-    console.log("Foi")
     gif = document.getElementById("gif-carregando")
-    gif.classList = ["ativo"]
+
+    gif.classList = ["ativa"]
+    setTimeout(() => {
+        gif.classList = ["desativa"]
+        setTimeout(() => (gif.classList = []), 1000)
+    }, 2000)
 }
 
 /* NAVEGAÇÃO */
 
-function telaAlocacao() {
-    titulo.innerText = "Alocação de Tarefas"
-    botaoPrincipal.innerText = "Concluir Ações"
+function tela(tit, botao) {
+    titulo.innerText = tit
+    botaoPrincipal.innerText = botao
 
-    botaoPrincipal.onclick = avancarTurno
-
-    document.getElementsByTagName("main")[0].classList = [gameState]
-}
-
-function telaStatus() {
-    titulo.innerText = "Estado da Família"
-    botaoPrincipal.innerText = "Designar Tarefas"
-
-    botaoPrincipal.onclick = changeState
-
+    console.log(gameState)
     document.getElementsByTagName("main")[0].classList = [gameState]
 }
 
 function changeState() {
     if (gameState == "alocacao") {
+        mostraGIF()
         gameState = "status"
-        telaStatus()
+        console.log(gameState)
+        // Espera a animação acontecer
+        setTimeout(() => {
+            avancarTurno()
+            tela("Estado da Família", "Designar Tarefas")
+        }, 1000)
     } else {
         gameState = "alocacao"
-        telaAlocacao()
+        tela("Alocação de Tarefas", "Concluir Ações")
     }
 }
