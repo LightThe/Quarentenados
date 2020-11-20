@@ -4,11 +4,10 @@
 
     justify-content: center;
     align-items: center;
-
-    min-height: 80vh;
 }
     #menu-principal > * {
-        margin-bottom: 8rem;
+        margin-bottom: 5%;
+		margin-top: 8%;
     }
 
 #titulo {
@@ -60,10 +59,38 @@
 	font-family: 'Courgette', sans-serif;
 	font-size: 3rem;
 	margin-bottom: 1rem;
+	padding-bottom: 20px;
+	padding-top: 20px;
+}
+
+#TabelaImagemETextos{
+	margin-left: 3%;
+	margin-right: 5%;
+}
+
+#TabelaComparativos{
+	width: 98%;
+	padding-left: 1%;
+	text-align: center;
+	/*border: 1px solid var(--destaque-A-alt);*/
+	border: 1px solid black;
+  	border-collapse: collapse;
+}
+
+#imgTabelaCompartativos{
+	width: 70px;
+	margin: 5px;
+}
+
+#LinhaTabela{
+	background-color: var(--destaque-A);
 }
 
 #textoInformacao{
 	margin-left: 3%;
+	margin-right: 3%;
+	padding-bottom: 20px;
+	padding-top: 20px;
 }
 
 #imagemComTextoInformacao{
@@ -77,6 +104,9 @@
 
 #imgInformacao{
 	width: 70px;
+	padding-bottom: 20px;
+	padding-top: 20px;
+	padding-right: 15px;
 }
 
 #descricaoInformacao{

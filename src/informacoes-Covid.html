@@ -17,39 +17,413 @@
 				<h1>Quarentenados</h1>
 				<h2>Um guia básico de informações sobre o COVID-19</h2>
 			</div>
-			<div id="boxInformacao">
-				<h2 id="tituloInformacao">Como é transmitido?</h2>
-				<p id="textoInformacao">A transmissão acontece de uma pessoa doente para outra ou
-	por contato próximo, por meio de:</p>
-				<div id="imagemComTextoInformacao">
-					<img id="imgInformacao" src="img/Transmissao/ApertoDeMao.png" alt="Aperto de mão">
-					<p id="descricaoInformacao">Aperto de mãos (principal forma de contágio)</p>
-				</div>
-				<div id="imagemComTextoInformacao">
-					<img id="imgInformacao" src="img/Transmissao/GoticulasDeSaliva.png" alt="Gotículas de saliva">
-					<p id="descricaoInformacao">Gotículas de saliva</p>
-				</div>
-				<div id="imagemComTextoInformacao">
-					<img id="imgInformacao" src="img/Transmissao/Espirro.png" alt="Espirro">
-					<p id="descricaoInformacao">Espirro</p>
-				</div>
-				<div id="imagemComTextoInformacao">
-					<img id="imgInformacao" src="img/Transmissao/Tosse.png" alt="Tosse">
-					<p id="descricaoInformacao">Tosse</p>
-				</div>
-				<div id="imagemComTextoInformacao">
-					<img id="imgInformacao" src="img/Transmissao/Catarro.png" alt="Catarro">
-					<p id="descricaoInformacao">Catarro</p>
-				</div>
-				<div id="imagemComTextoInformacao">
-					<img id="imgInformacao" src="img/Transmissao/Objetos.png" alt="Objetos">
-					<p id="descricaoInformacao">Objetos ou superfícies contaminadas, como celulares, mesas, maçanetas, brinquedos, teclados de computador etc.</p>
-				</div>
-			</div>
-		
-		<div>
-			<a id="botaoSaibaMais" href="http://www.saude.df.gov.br/wp-conteudo/uploads/2020/02/Cartilha-Informacoes-Coronavirus.pdf" target="_blank">Cartilha Oficial do Ministério da Saúde</a>
+			
 		</div>
+		
+		<div id="boxInformacao">
+			<h2 id="tituloInformacao">Como é transmitido?</h2>
+				<p id="textoInformacao">A transmissão acontece de uma pessoa doente para outra ou por contato próximo, por meio de:</p>
+			<table id="TabelaImagemETextos">
+				<tr>
+					<td>
+						<img id="imgInformacao" src="img/Transmissao/ApertoDeMao.png" alt="Aperto de mão">
+					</td>
+					<td>
+						<p id="descricaoInformacao">Aperto de mãos (principal forma de contágio)</p>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<img id="imgInformacao" src="img/Transmissao/GoticulasDeSaliva.png" alt="Gotículas de saliva">
+					</td>
+					<td>
+						<p id="descricaoInformacao">Gotículas de saliva</p>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<img id="imgInformacao" src="img/Transmissao/Espirro.png" alt="Espirro">
+					</td>
+					<td>
+						<p id="descricaoInformacao">Espirro</p>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<img id="imgInformacao" src="img/Transmissao/Tosse.png" alt="Tosse">
+					</td>
+					<td>
+						<p id="descricaoInformacao">Tosse</p>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<img id="imgInformacao" src="img/Transmissao/Catarro.png" alt="Catarro">
+					</td>
+					<td>
+						<p id="descricaoInformacao">Catarro</p>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<img id="imgInformacao" src="img/Transmissao/Objetos.png" alt="Objetos">
+					</td>
+					<td>
+						<p id="descricaoInformacao">Objetos ou superfícies contaminadas, como celulares, mesas, maçanetas, brinquedos, teclados de computador etc.</p>
+					</td>
+				</tr>
+			</table>
+		</div>
+		
+		<div style="position: relative; height: 3vw"></div>		
+				
+		<div id="boxInformacao">
+			<h2 id="tituloInformacao">Como se proteger?</h2>
+			<table id="TabelaImagemETextos">
+				<tr>
+					<td>
+						<img id="imgInformacao" src="img/ComoSeProteger/LaveAsMaos.png" alt="Lave as maos">
+					</td>
+					<td>
+						<p id="descricaoInformacao">Lave com frequência as mãos até a altura dos punhos, com água e sabão, ou então higienize com álcool em gel 70%.</p>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<img id="imgInformacao" src="img/ComoSeProteger/AoTossir.png" alt="Tossir">
+					</td>
+					<td>
+						<p id="descricaoInformacao">Ao tossir ou espirrar, cubra nariz e boca com lenço ou com o braço, e não com as mãos.</p>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<img id="imgInformacao" src="img/ComoSeProteger/EviteTocar.png" alt="Alcool em gel">
+					</td>
+					<td>
+						<p id="descricaoInformacao">Evite tocar olhos, nariz e boca com as mãos não lavadas. Ao tocar, lave sempre as mãos como já indicado.</p>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<img id="imgInformacao" src="img/ComoSeProteger/MantenhaUmaDiastancia.png" alt="Mantenha distancia">
+					</td>
+					<td>
+						<p id="descricaoInformacao">Mantenha uma distância mínima de cerca de 2 metros de qualquer pessoa tossindo ou espirrando. 
+						</p>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<img id="imgInformacao" src="img/ComoSeProteger/EviteAbracos.png" alt="Evite contato">
+					</td>
+					<td>
+						<p id="descricaoInformacao">Evite abraços, beijos e apertos de mãos. Adote um comportamento amigável sem contato físico, mas sempre com um sorriso no rosto.</p>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<img id="imgInformacao" src="img/ComoSeProteger/HigienizeComFrequencia.png" alt="Higiene">
+					</td>
+					<td>
+						<p id="descricaoInformacao">Higienize com frequência o celular e os brinquedos das crianças.</p>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<img id="imgInformacao" src="img/ComoSeProteger/NaoCompartilhe.png" alt="Nao compartilhe objetos">
+					</td>
+					<td>
+						<p id="descricaoInformacao">Não compartilhe objetos de uso pessoal, como talheres, toalhas, pratos e copos.</p>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<img id="imgInformacao" src="img/ComoSeProteger/MantenhaOsAmbientes.png" alt="Mantenha os ambientes ventilados">
+					</td>
+					<td>
+						<p id="descricaoInformacao">Mantenha os ambientes limpos e bem ventilados.</p>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<img id="imgInformacao" src="img/ComoSeProteger/SeEstiverDoente.png" alt="Evite contato">
+					</td>
+					<td>
+						<p id="descricaoInformacao">Se estiver doente, evite contato físico com outras pessoas, principalmente idosos e doentes crônicos, e fique em casa até melhorar.</p>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<img id="imgInformacao" src="img/ComoSeProteger/DurmaBem.png" alt="Evite contato">
+					</td>
+					<td>
+						<p id="descricaoInformacao">Durma bem e tenha uma alimentação saudável</p>
+					</td>
+				</tr>
+			</table>
+		</div>
+				
+		<div style="position: relative; height: 3vw"></div>
+		
+		<div id="boxInformacao">
+			<h2 id="tituloInformacao">Quais são os sintomas?</h2>
+			<table id="TabelaImagemETextos">
+				<tr>
+					<td>
+						<img id="imgInformacao" src="img/Sintomas/Febre.png" alt="Febre">
+					</td>
+					<td>
+						<p id="descricaoInformacao">Febre.</p>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<img id="imgInformacao" src="img/Sintomas/Tosse.png" alt="Tosse">
+					</td>
+					<td>
+						<p id="descricaoInformacao">Tosse.</p>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<img id="imgInformacao" src="img/Sintomas/DificuldadeRespiratoria.png" alt="Falra de ar">
+					</td>
+					<td>
+						<p id="descricaoInformacao">Dificuldade para respirar.</p>
+					</td>
+				</tr>
+
+			</table>
+		</div>
+		
+		<div style="position: relative; height: 3vw"></div>
+		
+		<div id="boxInformacao">
+			<h2 id="tituloInformacao">Comparativo entre doenças respiratórias:</h2>
+			<table id="TabelaComparativos">
+				<tr style="background-color: var(--destaque-A-alt);">
+					<td width="80px">
+					</td>
+					<td>
+						<strong>Sintomas</strong>
+					</td>
+					<td>
+						<strong>Coronavírus</strong><br><p>Os sintomas vão de leves a severos</p>
+					</td>
+					<td>
+						<strong>Resfriado</strong><br><p>Início gradual dos sintomas</p>
+					</td>
+					<td>
+						<strong>Gripe</strong><br><p>Início repentino dos sintomas</p>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<img id="imgTabelaCompartativos" src="img/CompararSintomas/Febre.png" alt="Febre">
+					</td>
+					<td>
+						<p><strong>Febre</strong></p>
+					</td>
+					<td>
+						<p>Comum</p>
+					</td>
+					<td>
+						<p>Raro</p>
+					</td>
+					<td>
+						<p>Comum</p>
+					</td>
+				</tr>
+				<tr id="LinhaTabela">
+					<td>
+						<img id="imgTabelaCompartativos" src="img/CompararSintomas/Cansaco.png" alt="Cansaço">
+					</td>
+					<td>
+						<p><strong>Cansaço</strong></p>
+					</td>
+					<td>
+						<p>Às vezes</p>
+					</td>
+					<td>
+						<p>Às vezes</p>
+					</td>
+					<td>
+						<p>Comum</p>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<img id="imgTabelaCompartativos" src="img/Sintomas/Tosse.png" alt="Tosse">
+					</td>
+					<td>
+						<p><strong>Tosse</strong></p>
+					</td>
+					<td>
+						<p>Comum <br> (geralmente seca)</p>
+					</td>
+					<td>
+						<p>Leve</p>
+					</td>
+					<td>
+						<p>Comum <br> (geralmente seca)</p>
+					</td>
+				</tr>
+				<tr id="LinhaTabela">
+					<td>
+						<img id="imgTabelaCompartativos" src="img/CompararSintomas/Espirros.png" alt="Espirro">
+					</td>
+					<td>
+						<p><strong>Espirros</strong></p>
+					</td>
+					<td>
+						<p>Raro</p>
+					</td>
+					<td>
+						<p>Comum</p>
+					</td>
+					<td>
+						<p>Raro</p>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<img id="imgTabelaCompartativos" src="img/CompararSintomas/DoresEMalEstar.png" alt="Dores no corpo">
+					</td>
+					<td>
+						<p><strong>Dores no corpo e mal-estar</strong></p>
+					</td>
+					<td>
+						<p>Às vezes</p>
+					</td>
+					<td>
+						<p>Comum</p>
+					</td>
+					<td>
+						<p>Às vezes</p>
+					</td>
+				</tr>
+				<tr id="LinhaTabela">
+					<td>
+						<img id="imgTabelaCompartativos" src="img/CompararSintomas/Coriza.png" alt="Coriza">
+					</td>
+					<td>
+						<p><strong>Coriza ou nariz entupido</strong></p>
+					</td>
+					<td>
+						<p>Raro</p>
+					</td>
+					<td>
+						<p>Comum</p>
+					</td>
+					<td>
+						<p>Às vezes</p>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<img id="imgTabelaCompartativos" src="img/CompararSintomas/DorDeGarganta.png" alt="Dor de garganta">
+					</td>
+					<td>
+						<p><strong>Dor de garganta</strong></p>
+					</td>
+					<td>
+						<p>Às vezes</p>
+					</td>
+					<td>
+						<p>Comum</p>
+					</td>
+					<td>
+						<p>Às vezes</p>
+					</td>
+				</tr>
+				<tr id="LinhaTabela">
+					<td>
+						<img id="imgTabelaCompartativos" src="img/CompararSintomas/Diarreia.png" alt="Diarreia">
+					</td>
+					<td>
+						<p><strong>Diarreia</strong></p>
+					</td>
+					<td>
+						<p>Raro</p>
+					</td>
+					<td>
+						<p>Raro</p>
+					</td>
+					<td>
+						<p>Às vezes, em crianças</p>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<img id="imgTabelaCompartativos" src="img/CompararSintomas/DorDeCabeca.png" alt="Dor de cabeça">
+					</td>
+					<td>
+						<p><strong>Dor de cabeça</strong></p>
+					</td>
+					<td>
+						<p>Às vezes</p>
+					</td>
+					<td>
+						<p>Raro</p>
+					</td>
+					<td>
+						<p>Comum</p>
+					</td>
+				</tr>
+				<tr id="LinhaTabela">
+					<td>
+						<img id="imgTabelaCompartativos" src="img/CompararSintomas/FaltaDeAr.png" alt="Falta de ar">
+					</td>
+					<td>
+						<p><strong>Falta de ar</strong></p>
+					</td>
+					<td>
+						<p>Às vezes</p>
+					</td>
+					<td>
+						<p>Raro</p>
+					</td>
+					<td>
+						<p>Raro</p>
+					</td>
+				</tr>
+			</table>
+		</div>
+			
+		<div style="position: relative; height: 3vw"></div>
+		
+		<div id="boxInformacao">
+			<h2 id="tituloInformacao">Estou com sintomas de gripe. O que devo fazer?</h2>
+			<table id="TabelaImagemETextos">
+				<tr>
+					<td>
+						<p id="descricaoInformacao">Se você está com sintomas de gripe, fique em casa por 14 dias e siga as orientações do Ministério da Saúde para
+o isolamento domiciliar.<br></p>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p id="descricaoInformacao"><br>Só procure um hospital de referência se estiver com falta de ar..</p>
+					</td>
+				</tr>
+			</table>
+		</div>
+		
+		<div style="position: relative; height: 3vw"></div>
+		
+		<div id="boxInformacao">
+			<h2 id="tituloInformacao">Mais informações</h2>
+			<table id="TabelaImagemETextos">
+				<tr>
+					<td>
+						<p id="descricaoInformacao">Todas as informaçãoes contidas nesta página foram obtidas no site oficial do ministério da saúde. Para saber mais clique <a href="http://www.saude.df.gov.br/wp-conteudo/uploads/2020/02/Cartilha-Informacoes-Coronavirus.pdf" target="_blank">Aqui</a></p>
+					</td>
+				</tr>
+			</table>
+		</div>
+		
+		<div style="position: relative; height: 3vw"></div>
 		
 	</body>
 	<script src="main.js"></script>
