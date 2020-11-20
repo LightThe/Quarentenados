@@ -1,9 +1,12 @@
+// Configurações
+const maxTurnos = 10
+
 class Personagem {
     constructor(nome) {
         this.nome = nome
         this.atividade = 0
         // 0 = bem; aumenta 1 por turno doente; retorna pra 0 quando curado
-        this.doente = 0;
+        this.doente = 0
         // Campos de texto
         this.info = {
             saude: "Bem",
@@ -11,7 +14,7 @@ class Personagem {
         }
         // Campos de porcentagem
         this.estado = {
-            alimentacao: 100,
+            fisico: 100,
             mental: 100
         }
     }
@@ -84,42 +87,36 @@ const nomes = [
     "Walisson",
     "Quésia"
 ]
-sobrenome = sobrenomes[Math.floor(Math.random() * sobrenomes.length)]
 
-let casa;
-let personagens;
-let game = {
-    state: "status",
-    turnos: 0,
-    finalRuim: false,
-    nomeFamilia: ""
-};
+let casa
+let personagens
+let game
 
-// popula os personagens
+// carrega o jogo
 // tenta ler da máquina
 if (localStorage.getItem("jogo")) {
     personagens = JSON.parse(localStorage.getItem("jogo")).personagens
     casa = JSON.parse(localStorage.getItem("jogo")).casa
+    game = JSON.parse(localStorage.getItem("jogo")).game
 } else {
+    const sobrenome = sobrenomes[Math.floor(Math.random() * sobrenomes.length)]
     personagens = [
-        new Personagem(
-            nomes[Math.floor(Math.random() * nomes.length)] + " " + sobrenome
-        ),
-        new Personagem(
-            nomes[Math.floor(Math.random() * nomes.length)] + " " + sobrenome
-        ),
-        new Personagem(
-            nomes[Math.floor(Math.random() * nomes.length)] + " " + sobrenome
-        ),
-        new Personagem(
-            nomes[Math.floor(Math.random() * nomes.length)] + " " + sobrenome
-        )
+        new Personagem(nomes[Math.floor(Math.random() * nomes.length)]),
+        new Personagem(nomes[Math.floor(Math.random() * nomes.length)]),
+        new Personagem(nomes[Math.floor(Math.random() * nomes.length)]),
+        new Personagem(nomes[Math.floor(Math.random() * nomes.length)])
     ]
     casa = {
         alimento: 75,
         dinheiro: 75,
         medicamento: 75,
         estado: 100
+    }
+    game = {
+        state: "status",
+        turnos: 0,
+        finalRuim: false,
+        nomeFamilia: sobrenome
     }
     persistir()
 }
@@ -129,7 +126,6 @@ const divFamilia = document.getElementById("family-view")
 const divCasa = document.querySelector("#house-view")
 const titulo = document.querySelector("header > h1")
 const botaoPrincipal = document.querySelector("#change-view")
-// necessario para converter de HTMLCollection para Array
 const dropdowns = divFamilia.getElementsByClassName("drop-tarefas")
 
 /* UTILIDADES */
@@ -138,8 +134,10 @@ function loadPage(nomePagina) {
     location.href = nomePagina + ".html"
 }
 function persistir() {
-    localStorage.setItem("jogo", JSON.stringify({ personagens, casa }))
+    localStorage.setItem("jogo", JSON.stringify({ personagens, casa, game }))
 }
+// Armazena o custo total de recursos na passagem de turnos
+let recursosDescontados
 
 /* AÇÕES */
 // cada objeto representa uma ação. Seus campos "efeitos" representam as mudanças que ele realiza
@@ -153,7 +151,7 @@ definicao = [
             risco: 1,
             personagem: {
                 mental: -20,
-                alimentacao: 15
+                fisico: 15
             },
             casa: {
                 alimento: -5,
@@ -167,7 +165,7 @@ definicao = [
             risco: 30,
             personagem: {
                 mental: 5,
-                alimentacao: -10
+                fisico: -10
             },
             casa: {
                 alimento: 60,
@@ -181,10 +179,10 @@ definicao = [
             risco: 30,
             personagem: {
                 mental: -5,
-                alimentacao: -10
+                fisico: -10
             },
             casa: {
-                medicamento: 40,
+                medicamento: 100,
                 dinheiro: -60
             }
         }
@@ -195,7 +193,7 @@ definicao = [
             risco: 10,
             personagem: {
                 mental: 30,
-                alimentacao: -20
+                fisico: -20
             }
         }
     },
@@ -205,7 +203,7 @@ definicao = [
             risco: 20,
             personagem: {
                 mental: 20,
-                alimentacao: 50
+                fisico: 50
             },
             casa: {
                 dinheiro: -15
@@ -218,7 +216,7 @@ definicao = [
             risco: 1,
             personagem: {
                 mental: -10,
-                alimentacao: 15
+                fisico: 15
             },
             casa: {
                 alimento: -5
@@ -231,7 +229,7 @@ definicao = [
             risco: 15,
             personagem: {
                 mental: 20,
-                alimentacao: -30
+                fisico: -30
             },
             casa: {
                 dinheiro: -10
@@ -244,7 +242,7 @@ definicao = [
             risco: 1,
             personagem: {
                 mental: 10,
-                alimentacao: 15
+                fisico: 15
             },
             casa: {
                 alimento: -5
@@ -257,7 +255,7 @@ definicao = [
             risco: 15,
             personagem: {
                 mental: -20,
-                alimentacao: -20
+                fisico: -20
             },
             casa: {
                 dinheiro: 25
@@ -270,7 +268,7 @@ definicao = [
             risco: 35,
             personagem: {
                 mental: 50,
-                alimentacao: -15
+                fisico: -15
             },
             casa: {
                 dinheiro: -10
@@ -283,7 +281,7 @@ definicao = [
             risco: 1,
             personagem: {
                 mental: 15,
-                alimentacao: 50
+                fisico: 50
             },
             casa: {
                 estado: -10,
@@ -297,7 +295,7 @@ definicao = [
             risco: 5,
             personagem: {
                 mental: 40,
-                alimentacao: -10
+                fisico: -10
             },
             casa: {
                 alimento: 30
@@ -310,7 +308,7 @@ definicao = [
             risco: 15,
             personagem: {
                 mental: 30,
-                alimentacao: 30
+                fisico: 30
             },
             casa: {
                 alimento: 5
@@ -323,7 +321,7 @@ definicao = [
             risco: 20,
             personagem: {
                 mental: 50,
-                alimentacao: 30
+                fisico: 30
             },
             casa: {
                 alimento: 5
@@ -336,7 +334,7 @@ definicao = [
             risco: 30,
             personagem: {
                 mental: 10,
-                alimentacao: -20
+                fisico: -20
             },
             casa: {
                 dinheiro: 20
@@ -349,7 +347,7 @@ definicao = [
             risco: 15,
             personagem: {
                 mental: -20,
-                alimentacao: 50
+                fisico: 50
             },
             casa: {
                 alimento: 30
@@ -362,10 +360,11 @@ definicao = [
             risco: -1,
             personagem: {
                 mental: 10,
-                alimentacao: 10
+                fisico: 10
             },
             casa: {
-                medicamento: 100
+                medicamento: -100,
+                dinheiro: -30
             }
         }
     }
@@ -438,7 +437,9 @@ function carregaDivsStatus() {
     personagens.forEach((personagem, id) => {
         const clone = modelo.cloneNode(true)
         clone.id = `p${id}`
-        clone.querySelector("h1").innerHTML = personagem.nome
+        clone.querySelector(
+            "h1"
+        ).innerHTML = `${personagem.nome} ${game.nomeFamilia}`
         clone.classList.remove("hidden")
         divFamilia.appendChild(clone)
     })
@@ -447,13 +448,31 @@ function carregaDivsStatus() {
 }
 
 function validarAcoes() {
-    // Verirfica se todas as ações selecionadas diferem da opção "Selecionar", que é o primeiro item
+    // Armazena a diferença que cada ação vai fazer nos recursos da casa
+    // para ao final verificar se existem recursos o suficiente para tal
+    recursosDescontados = { ...casa }
     for (drop of dropdowns) {
-        const value = drop.querySelector("select").value
-        // console.log(value)
-        if (value == 0) return false
+        const acao = definicao[drop.querySelector("select").value]
+        // console.log(acao)
+        // Verirfica se todas as ações selecionadas diferem da opção "Selecionar", que é o primeiro item
+        if (acao.nome == "Selecionar")
+            throw "Por favor, selecione uma ação para cada personagem"
+
+        // Contabiliza o efeito desta ação sobre os recursos
+        if (acao.efeitos.casa) {
+            const atributos = Object.keys(acao.efeitos.casa)
+            atributos.forEach(
+                (atributo) =>
+                    (recursosDescontados[atributo] +=
+                        acao.efeitos.casa[atributo])
+            )
+        }
     }
-    return true
+    // Passa por cada recurso da casa e verifica se algum valor ficou negativo, indicando que não há recurso o suficiente
+    for (recurso of Object.keys(recursosDescontados)) {
+        if (recursosDescontados[recurso] < 0)
+            throw `O recurso ${recurso} é insuficiente para executar todas essas ações!\nNomeie um personagem para coletá-lo ou tente uma combinação que gaste-o menos.`
+    }
 }
 
 function consumir(acao, id) {
@@ -461,24 +480,30 @@ function consumir(acao, id) {
     if (acao.nome === "Selecionar")
         throw "Por favor, selecione uma ação para cada personagem"
     // Verifica se o personagem foi ou já está contaminado e aumenta o turno doente
-    if(Math.floor(Math.random()*100) <= acao.efeitos.risco || personagens[id].doente > 0){
-        personagens[id].doente++;
-        personagens[id].info.saude = "Doente";
+    if (
+        personagens[id].doente > 0 ||
+        Math.floor(Math.random() * 100) <= acao.efeitos.risco
+    ) {
+        personagens[id].doente++
+        personagens[id].info.saude = "Doente"
     }
-    //Condição especial, ação de cura
-    if(acao.efeitos.risco < 0){
-        personagens[id].doente = 0;
-        personagens[id].info.saude = "Bem";
+    // Condição especial, ação de cura
+    if (acao.efeitos.risco < 0) {
+        personagens[id].doente = 0
+        personagens[id].info.saude = "Bem"
     }
     // atualiza o estado do personagem
     // a partir da convenção de que os personagens e os efeitos têm as mesmas chaves para cada campo, passa por cada nome de campo e atualiza seu valor
     const atributos = Object.keys(acao.efeitos.personagem)
     atributos.forEach((atributo) => {
-        //Se o efeito da ação for negativo aumenta em 30% a queda dos valores por turno doente
-        if(acao.efeitos.personagem[atributo] < 0)
-            personagens[id].estado[atributo] += acao.efeitos.personagem[atributo] * (1 + (personagens[id].doente * 0.3));
+        // Se o efeito da ação for negativo aumenta em 30% a queda dos valores por turno doente. Se for positivo, diminui em 30%.
+        const efeito = acao.efeitos.personagem[atributo]
+        if (efeito < 0)
+            personagens[id].estado[atributo] +=
+                efeito * (1 + personagens[id].doente * 0.3)
         else
-            personagens[id].estado[atributo] += acao.efeitos.personagem[atributo];
+            personagens[id].estado[atributo] +=
+                efeito - efeito * personagens[id].doente * 0.3
         // Garante que não passe de nenhum limite
         personagens[id].estado[atributo] = Math.max(
             Math.min(personagens[id].estado[atributo], 100),
@@ -486,15 +511,7 @@ function consumir(acao, id) {
         )
     })
 
-    // atualiza o estado da casa
-    // segue a mesma convenção
-    if (acao.efeitos.casa) {
-        const atributos = Object.keys(acao.efeitos.casa)
-        atributos.forEach((atributo) => {
-            casa[atributo] += acao.efeitos.casa[atributo]
-            casa[atributo] = Math.max(Math.min(casa[atributo], 100), 0)
-        })
-    }
+    // Não é necessário contabilizar o efeito sobre a casa, pois o resultado dessas contabilizações está armazenado na variável recursosDescontados
 
     // Zera a ação selecionada do personagem
     personagens[id].atividade = 0
@@ -502,10 +519,6 @@ function consumir(acao, id) {
 
 // A função de avançar turnos, que pega o número da ação selecionada para cada personagem
 function avancarTurno() {
-    if (!validarAcoes()) {
-        alert("Por favor, selecione uma ação para cada personagem")
-        return
-    }
     personagens.forEach((personagem, id) => {
         const select = divFamilia.querySelector(`#p${id} select`)
         personagem.atividade = select.value
@@ -513,11 +526,13 @@ function avancarTurno() {
         // console.log(acao)
         consumir(definicao[acao], id)
     })
+    // Aplica os efeitos sobre a casa
+    casa = { ...recursosDescontados }
     // Desconta do estado da casa
     casa.estado -= 20
 
     // Atualiza o contador de turnos
-    game.turnos ++;
+    game.turnos++
 
     atualizaTela()
     persistir()
@@ -543,8 +558,14 @@ function tela(tit, botao) {
 }
 
 function changeState() {
-    let maxTurnos = 10;
     if (game.state == "alocacao") {
+        // Verifica a ação selecionada de cada personagem por valores inválidos
+        try {
+            validarAcoes()
+        } catch (mensagem) {
+            alert(mensagem)
+            return
+        }
         mostraGIF()
         game.state = "status"
         // Espera a animação acontecer
@@ -554,10 +575,10 @@ function changeState() {
         }, 1000)
     } else {
         //Verifica se ele pode terminar o jogo
-        if(game.turnos >= maxTurnos || game.finalRuim){
-            game.nomeFamilia = personagens[0].nome.split(" ")[1]; // Todas as vezes a variavel sobrenome vem diferente do da família, portanto fiz esse gato.
-            localStorage.setItem("gameState", JSON.stringify(game));
-            loadPage('fim-jogo');
+        if (game.turnos >= maxTurnos || game.finalRuim) {
+            game.nomeFamilia = personagens[0].nome.split(" ")[1] // Todas as vezes a variavel sobrenome vem diferente do da família, portanto fiz esse gato.
+            localStorage.setItem("gameState", JSON.stringify(game))
+            loadPage("fim-jogo")
         }
         //Continua o jogo
         game.state = "alocacao"

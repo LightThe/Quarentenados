@@ -14,12 +14,12 @@
 	<body>
 		<div id="menu-principal">
 			<div id="titulo">
-                <div id="_final-bom" style="display: none;">
+                <div id="_final-bom" class="hidden">
                     <h1>Vitória!</h1>
                     <h2>Uma cura para a doença foi descoberta.</h2>
                     <h2>A família <span id="_nome-familia"></span> agora pode sair de casa sem se contaminar.</h2>
                 </div>
-                <div id="_final-ruim" style="display: none;">
+                <div id="_final-ruim" class="hidden">
                     <h1>Oh não!</h1>
                     <h2>Um dos membros da família ficou muito doente.</h2>
                     <h2>É importante tomar cuidado com a alimentação e evitar se contaminar.</h2>
@@ -32,16 +32,15 @@
 	</body>
     <script src="main.js"></script>
     <script>
-        let oJogo = JSON.parse(localStorage.getItem("gameState"));
+        let game = JSON.parse(localStorage.getItem("jogo").game);
         //verifica e exibe o final correto
-        let exibeDiv = document.querySelector(oJogo.finalRuim ? "#_final-ruim" : "#_final-bom");
-        exibeDiv.removeAttribute("style");
+        let exibeDiv = document.querySelector(game.finalRuim ? "#_final-ruim" : "#_final-bom");
+        exibeDiv.classList.remove('hidden')
 
         let spanFamilia = document.querySelector("#_nome-familia");
-        spanFamilia.innerText = oJogo.nomeFamilia;
+        spanFamilia.innerText = game.nomeFamilia;
         
         //Limpa o estado do jogo
         localStorage.removeItem("jogo");
-        localStorage.removeItem("gameState");
     </script>
 </html>
