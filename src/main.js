@@ -2,7 +2,7 @@
 const config = {
     maxTurnos: 10,
     // cadencia o efeito negativo causado sobre a saud emental do personagem com base no estado da casa
-    efeitoBagunça: 0.3,
+    efeitoBagunca: 0.3,
     // quantos pontos de estado a casa perde por turno
     velocidadeBagunca: 20,
     // cadencia o efeito negativo que estar doente causa nos resultados das ações
@@ -516,9 +516,14 @@ function consumir(acao, id) {
             personagens[id].estado[atributo] +=
                 efeito - efeito * personagens[id].doente * config.efeitoDoenca
         // verifica se chegou a 0
-        if (personagens[id].estado[atributo] <= 0) finalRuim = true
+        if (personagens[id].estado[atributo] <= 0) {
+            game.finalRuim = true
+        }
         // Garante que não passe de nenhum limite
-        personagens[id].estado[atributo] = Math.min(personagens[id].estado[atributo], 100)
+        personagens[id].estado[atributo] = Math.min(
+            personagens[id].estado[atributo],
+            100
+        )
     })
 
     // Não é necessário contabilizar o efeito sobre a casa, pois o resultado dessas contabilizações está armazenado na variável recursosDescontados
@@ -585,14 +590,14 @@ function changeState() {
         setTimeout(() => {
             avancarTurno()
             tela("Estado da Família", "Designar Tarefas")
+            //Verifica se ele pode terminar o jogo
+            if (game.turnos >= config.maxTurnos || game.finalRuim) {
+                game.nomeFamilia = personagens[0].nome.split(" ")[1] // Todas as vezes a variavel sobrenome vem diferente do da família, portanto fiz esse gato.
+                localStorage.setItem("gameState", JSON.stringify(game))
+                loadPage("fim-jogo")
+            }
         }, 1000)
     } else {
-        //Verifica se ele pode terminar o jogo
-        if (game.turnos >= config.maxTurnos || game.finalRuim) {
-            game.nomeFamilia = personagens[0].nome.split(" ")[1] // Todas as vezes a variavel sobrenome vem diferente do da família, portanto fiz esse gato.
-            localStorage.setItem("gameState", JSON.stringify(game))
-            loadPage("fim-jogo")
-        }
         //Continua o jogo
         game.state = "alocacao"
         tela("Alocação de Tarefas", "Concluir Ações")

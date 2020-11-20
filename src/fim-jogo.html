@@ -21,23 +21,23 @@
                 </div>
                 <div id="_final-ruim" class="hidden">
                     <h1>Oh não!</h1>
-                    <h2>Um dos membros da família ficou muito doente.</h2>
+                    <h2>A saúde de um dos membros da família se esgotou.</h2>
                     <h2>É importante tomar cuidado com a alimentação e evitar se contaminar.</h2>
                 </div>
             </div>
             <div id="menus">
-                <button onclick="loadPage('index')">Jogar novamente</button>
+                <button onclick="location.href = 'index.html'">Jogar novamente</button>
             </div>
 		</div>
 	</body>
-    <script src="main.js"></script>
+    <!-- <script src="main.js"></script> -->
     <script>
-        let game = JSON.parse(localStorage.getItem("jogo").game);
+        const game = JSON.parse(localStorage.getItem("jogo")).game;
         //verifica e exibe o final correto
-        let exibeDiv = document.querySelector(game.finalRuim ? "#_final-ruim" : "#_final-bom");
+        const exibeDiv = document.querySelector(game.finalRuim ? "#_final-ruim" : "#_final-bom");
         exibeDiv.classList.remove('hidden')
 
-        let spanFamilia = document.querySelector("#_nome-familia");
+        const spanFamilia = document.querySelector("#_nome-familia");
         spanFamilia.innerText = game.nomeFamilia;
         
         //Limpa o estado do jogo
