@@ -12,6 +12,9 @@
     --destaque-A-alt: rgb(125, 163, 141);
     --limites: #9b957c;
     --destaque-B: rgb(134, 87, 87);
+    --cor-vinho: rgb(109, 8, 8);
+    --cor-vermelha: rgb(196, 9, 9);
+    --cor-vermelha-desbotada: rgb(114, 69, 69);
 
     font-size: 10px;
 }

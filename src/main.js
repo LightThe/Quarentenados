@@ -390,6 +390,8 @@ function atualizaTela() {
     personagens.forEach((personagem, id) => {
         // console.log(personagem, id)
         const divPersonagem = divFamilia.querySelector(`#p${id}`)
+        // Atualiza a saúde dele
+        divPersonagem.classList = [personagem.info.saude.toLowerCase()]
         // Atualiza campos de texto
         atualizaCampos(
             personagem.info,
@@ -479,16 +481,17 @@ function consumir(acao, id) {
     // não deve ser possível passar o turno com a opção "Selecionar" selecionada
     if (acao.nome === "Selecionar")
         throw "Por favor, selecione uma ação para cada personagem"
-    // Verifica se o personagem foi ou já está contaminado e aumenta o turno doente
-    if (
-        personagens[id].doente > 0 ||
-        Math.floor(Math.random() * 100) <= acao.efeitos.risco
-    ) {
+    // Verifica se o personagem está contaminado e aumenta o turno doente
+    if (personagens[id].doente > 0) {
         personagens[id].doente++
-        personagens[id].info.saude = "Doente"
     }
-    // Condição especial, ação de cura
+    // Aplica o risco de se contaminar
+    else if (Math.floor(Math.random() * 100) <= acao.efeitos.risco) {
+        personagens[id].info.saude = "Doente"
+        personagens[id].doente = 1
+    }
     if (acao.efeitos.risco < 0) {
+        // Condição especial, ação de cura
         personagens[id].doente = 0
         personagens[id].info.saude = "Bem"
     }

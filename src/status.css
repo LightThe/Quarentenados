@@ -55,6 +55,18 @@ main {
             margin-bottom: 2rem;
         }
 
+        #family-view > div.doente > strong {
+            color: var(--cor-vermelha);
+        }
+        #family-view > div.doente > .bar {
+            background: var(--cor-vermelha-desbotada);
+            color: white;
+        }
+        #family-view > div.doente > .bar > div {
+            background: var(--cor-vinho);
+        }
+
+
         #family-view > div > *:last-child {
             /* border-top: 1px solid rgb(199, 199, 199); */
             border-top: 1px solid var(--limites);
