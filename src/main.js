@@ -2,6 +2,8 @@ class Personagem {
     constructor(nome) {
         this.nome = nome
         this.atividade = 0
+        // 0 = bem; aumenta 1 por turno doente; retorna pra 0 quando curado
+        this.doente = 0;
         // Campos de texto
         this.info = {
             saude: "Bem",
@@ -353,6 +355,19 @@ definicao = [
                 alimento: 30
             }
         }
+    },
+    {
+        nome: "Ir ao Hospital",
+        efeitos: {
+            risco: -1,
+            personagem: {
+                mental: 10,
+                alimentacao: 10
+            },
+            casa: {
+                medicamento: 100
+            }
+        }
     }
 ]
 
@@ -445,16 +460,30 @@ function consumir(acao, id) {
     // não deve ser possível passar o turno com a opção "Selecionar" selecionada
     if (acao.nome === "Selecionar")
         throw "Por favor, selecione uma ação para cada personagem"
+    // Verifica se o personagem foi ou já está contaminado e aumenta o turno doente
+    if(Math.floor(Math.random()*100) <= acao.efeitos.risco || personagens[id].doente > 0){
+        personagens[id].doente++;
+        personagens[id].info.saude = "Doente";
+    }
+    //Condição especial, ação de cura
+    if(acao.efeitos.risco < 0){
+        personagens[id].doente = 0;
+        personagens[id].info.saude = "Bem";
+    }
     // atualiza o estado do personagem
     // a partir da convenção de que os personagens e os efeitos têm as mesmas chaves para cada campo, passa por cada nome de campo e atualiza seu valor
     const atributos = Object.keys(acao.efeitos.personagem)
     atributos.forEach((atributo) => {
-        personagens[id].estado[atributo] += acao.efeitos.personagem[atributo]
+        //Se o efeito da ação for negativo aumenta em 30% a queda dos valores por turno doente
+        if(acao.efeitos.personagem[atributo] < 0)
+            personagens[id].estado[atributo] += acao.efeitos.personagem[atributo] * (1 + (personagens[id].doente * 0.3));
+        else
+            personagens[id].estado[atributo] += acao.efeitos.personagem[atributo];
+        // Garante que não passe de nenhum limite
         personagens[id].estado[atributo] = Math.max(
             Math.min(personagens[id].estado[atributo], 100),
             0
         )
-        // Garante que não passe de nenhum limite
     })
 
     // atualiza o estado da casa
