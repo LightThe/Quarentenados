@@ -4,7 +4,9 @@ const config = {
     // cadencia o efeito negativo causado sobre a saud emental do personagem com base no estado da casa
     efeitoBagunça: 0.3,
     // quantos pontos de estado a casa perde por turno
-    velocidadeBagunca: 20
+    velocidadeBagunca: 20,
+    // cadencia o efeito negativo que estar doente causa nos resultados das ações
+    efeitoDoenca: 0.3
 }
 
 class Personagem {
@@ -509,10 +511,10 @@ function consumir(acao, id) {
         const efeito = acao.efeitos.personagem[atributo]
         if (efeito < 0)
             personagens[id].estado[atributo] +=
-                efeito * (1 + personagens[id].doente * 0.3)
+                efeito * (1 + personagens[id].doente * config.efeitoDoenca)
         else
             personagens[id].estado[atributo] +=
-                efeito - efeito * personagens[id].doente * 0.3
+                efeito - efeito * personagens[id].doente * config.efeitoDoenca
         // verifica se chegou a 0
         if (personagens[id].estado[atributo] <= 0) finalRuim = true
         // Garante que não passe de nenhum limite
