@@ -554,7 +554,7 @@ function changeState() {
         }, 1000)
     } else {
         //Verifica se ele pode terminar o jogo
-        if(game.turnos >= maxTurnos){
+        if(game.turnos >= maxTurnos || game.finalRuim){
             game.nomeFamilia = personagens[0].nome.split(" ")[1]; // Todas as vezes a variavel sobrenome vem diferente do da família, portanto fiz esse gato.
             localStorage.setItem("gameState", JSON.stringify(game));
             loadPage('fim-jogo');
