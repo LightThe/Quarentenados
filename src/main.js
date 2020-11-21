@@ -515,10 +515,6 @@ function consumir(acao, id) {
         else
             personagens[id].estado[atributo] +=
                 efeito - efeito * personagens[id].doente * config.efeitoDoenca
-        // verifica se chegou a 0
-        if (personagens[id].estado[atributo] <= 0) {
-            game.finalRuim = true
-        }
         // Garante que não passe de nenhum limite
         personagens[id].estado[atributo] = Math.min(
             personagens[id].estado[atributo],
@@ -542,6 +538,10 @@ function avancarTurno() {
         consumir(definicao[acao], id)
         // reduz um pouco a saúde mental com base no estado da casa
         personagem.estado.mental -= (100 - casa.estado) * config.efeitoBagunca
+        // verifica a saúde chegou a 0
+        if (Object.values(personagem.estado).some((estado) => estado <= 0)) {
+            game.finalRuim = true
+        }
     })
     // Aplica os efeitos sobre a casa
     casa = { ...recursosDescontados }
