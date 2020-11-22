@@ -563,7 +563,7 @@ function mostraGIF() {
     setTimeout(() => {
         gif.classList = ["desativa"]
         setTimeout(() => (gif.classList = []), 1000)
-    }, 2000)
+    }, 5500)
 }
 
 /* NAVEGAÇÃO */
